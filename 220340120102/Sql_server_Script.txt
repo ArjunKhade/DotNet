@@ -1,0 +1,57 @@
+CREATE TABLE [dbo].[Employees] (
+    [EmpNo]  INT             IDENTITY (1, 1) NOT NULL,
+    [Name]   NVARCHAR (50)  NOT NULL,
+    [City]  NVARCHAR(50) NOT NULL,
+    [Address] NVARCHAR(50)             NOT NULL,
+    CONSTRAINT [PK_dbo.Employees] PRIMARY KEY CLUSTERED ([EmpNo] ASC),
+   
+);
+
+*************************************************
+Create procedure [dbo].[AddNewEmpDetails]  
+(  
+   @Name varchar (50),  
+   @City varchar (50),  
+   @Address varchar (50)  
+)  
+as  
+begin  
+   Insert into Employees values(@Name,@City,@Address)  
+End 
+
+*****************************************************
+Create Procedure [dbo].[GetEmployees]  
+as  
+begin  
+   select *from Employees  
+End 
+
+*****************************************************
+Create procedure [dbo].[UpdateEmpDetails]  
+(  
+   @EmpNo int,  
+   @Name varchar (50),  
+   @City varchar (50),  
+   @Address varchar (50)  
+)  
+as  
+begin  
+   Update Employee   
+   set Name=@Name,  
+   City=@City,  
+   Address=@Address  
+   where EmpNo =@EmpNo 
+End 
+
+**********************************************************
+Create procedure [dbo].[DeleteEmpById]  
+(  
+   @EmpNo int  
+)  
+as   
+begin  
+   Delete from Employees where EmpNo =@EmpNo 
+End 
+
+************************************************
+

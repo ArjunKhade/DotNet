@@ -1,0 +1,66 @@
+CREATE TABLE [dbo].Departments
+(
+	[DeptNo] INT NOT NULL PRIMARY KEY, 
+    [DeptName] VARCHAR(50) NOT NULL
+)
+
+***********************************
+
+CREATE TABLE [dbo].Employees
+(
+	[EmpNo] INT NOT NULL PRIMARY KEY, 
+    [Name] VARCHAR(50) NOT NULL, 
+    [Basic] DECIMAL(18, 2) NOT NULL, 
+    [DeptNo] INT NOT NULL, 
+    CONSTRAINT [FK_Employees_Departments] FOREIGN KEY (DeptNo) REFERENCES Departments(DeptNo)
+)
+
+************************************
+
+CREATE PROCEDURE [dbo].InsertEmployee
+	@EmpNo int,
+	@Name varchar(50),
+	@Basic decimal(18,2),
+	@DeptNo int 
+AS
+	insert into Employees values(@EmpNo,@Name,@Basic,@DeptNo)
+
+RETURN 0
+
+
+*********************************
+CREATE TABLE StudentInfo (
+
+Id INT NOT NULL PRIMARY KEY ,
+StudentName Varchar(50),
+City Varchar (50),
+Address Varchar(50)
+)
+
+
+
+SELECT * FROM StudentInfo
+-- sp for inserting the values 
+
+CREATE PROCEDURE  sp_InsertIntoStudentInfo(
+
+@Id int ,
+@StudentName varchar(50),
+@City varchar(50),
+@Address varchar(50)
+)
+AS
+BEGIN 
+
+INSERT INTO StudentInfo (Id , StudentName, City,Address) VALUES (@Id, @StudentName, @City , @Address)
+END
+
+
+CREATE PROCEDURE sp_GetStudentDetails
+AS 
+BEGIN
+SELECT * FROM StudentInfo;
+END
+
+EXEC sp_GetStudentDetails
+
